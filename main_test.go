@@ -5,8 +5,8 @@ import (
 	"sync"
 	"testing"
 	"time"
-
-	"github.com/crosbymichael/skydock/docker"
+	
+	"./docker"
 	"github.com/skynetservices/skydns1/client"
 	"github.com/skynetservices/skydns1/msg"
 )

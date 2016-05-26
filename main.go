@@ -11,11 +11,9 @@ import (
 	"os"
 	"sync"
 	"time"
-
-	"github.com/crosbymichael/log"
-	"github.com/crosbymichael/skydock/docker"
-	"github.com/crosbymichael/skydock/utils"
-	influxdb "github.com/influxdb/influxdb/client"
+	"./docker"
+	"./utils"
+	"./log"
 	"github.com/skynetservices/skydns1/client"
 	"github.com/skynetservices/skydns1/msg"
 )
@@ -70,34 +68,6 @@ func validateSettings() {
 	if domain == "" {
 		fatal(fmt.Errorf("Must specify your skydns domain"))
 	}
-}
-
-func setupLogger() error {
-	var (
-		logger log.Logger
-		err    error
-	)
-
-	if host := os.Getenv("INFLUXDB_HOST"); host != "" {
-		config := &influxdb.ClientConfig{
-			Host:     host,
-			Database: os.Getenv("INFLUXDB_DATABASE"),
-			Username: os.Getenv("INFLUXDB_USER"),
-			Password: os.Getenv("INFLUXDB_PASSWORD"),
-		}
-
-		logger, err = log.NewInfluxdbLogger(fmt.Sprintf("%s.%s", environment, domain), "skydock", config)
-		if err != nil {
-			return err
-		}
-	} else {
-		logger = log.NewStandardLevelLogger("skydock")
-	}
-
-	if err := log.SetLogger(logger); err != nil {
-		return err
-	}
-	return nil
 }
 
 func heartbeat(uuid string) {
@@ -242,10 +212,6 @@ func fatal(err error) {
 
 func main() {
 	validateSettings()
-	if err := setupLogger(); err != nil {
-		fatal(err)
-	}
-
 	var (
 		err   error
 		group = &sync.WaitGroup{}

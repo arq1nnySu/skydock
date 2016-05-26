@@ -11,9 +11,8 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.com/crosbymichael/log"
-	"github.com/crosbymichael/skydock/utils"
+	"../log"
+	"../utils"
 )
 
 type (
