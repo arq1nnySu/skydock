@@ -1,4 +1,4 @@
-FROM crosbymichael/golang
+FROM golang:1.6
 
 # go get to download all the deps
 RUN go get -u github.com/malyhov/skydock
