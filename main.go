@@ -11,9 +11,10 @@ import (
 	"os"
 	"sync"
 	"time"
-	"./docker"
-	"./utils"
-	"./log"
+
+	"github.com/eiencore/skydock/docker"
+	"github.com/eiencore/skydock/log"
+	"github.com/eiencore/skydock/utils"
 	"github.com/skynetservices/skydns1/client"
 	"github.com/skynetservices/skydns1/msg"
 )
