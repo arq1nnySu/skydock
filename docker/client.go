@@ -11,8 +11,9 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"../log"
-	"../utils"
+
+	"github.com/eiencore/skydock/log"
+	"github.com/eiencore/skydock/utils"
 )
 
 type (
